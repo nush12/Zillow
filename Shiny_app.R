@@ -5,7 +5,7 @@ library(readr)
 library(dplyr)
 library(scales)
 
-app_data <-  load("data/app_data.RData")
+load("data/app_data.RData")
 
 
 # UI Function -------------------------------------------------------------
@@ -51,7 +51,7 @@ server <- function(input, output) {
   
   
   
-  # Create the scatterplot object the plotOutput function is expecting
+  # Create the barplot object the plotOutput function is expecting
 output$payback_period <- renderPlot({
     
     year <- input_func()
