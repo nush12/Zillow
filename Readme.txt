@@ -1,2 +1,1 @@
-Please Refer to the Capone.html
-Analysing short term renting of 2 bedroom properties in NYC.
+Please refer to the breif report at http://rpubs.com/Nush12/twobedroom_rentals
