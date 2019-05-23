@@ -1,96 +1,73 @@
----
-title: "Airbnb Rentals"
-author: "Anusha Chintakunta Manjunatha"
-date: "March 22, 2019"
-output: 
-  html_document:
-    keep_md: true
----
+Airbnb Rentals
+================
+Anusha Chintakunta Manjunatha
+March 22, 2019
 
+Analysing Short-term Property Renting in NYC
+--------------------------------------------
 
+### Introduction
 
+##### **Problem Statement**
 
+You are consulting for a real estate company that has a niche in purchasing properties to rent out short-term as part of their business model specifically within New York City. The real estate company has already concluded that two bedroom properties are the most profitable; however, they do not know which zip codes are the best to invest in.
+The real estate company has engaged your firm to build out a data product and provide your conclusions to help them understand which zip codes would generate the most profit on short term rentals within New York City. You will be looking at publicly available data from Zillow and AirBnB:
 
+-   Cost data: Zillow provides us an estimate of value for two-bedroom properties
+-   Revenue data: AirBnB is the medium through which the investor plans to lease out their investment property. Fortunately for you, we are able to see how much properties in certain neighborhoods rent out for in New York City
+-   You can assume an occupancy rate of 75% or you can come up with your own model to calculate occupancy; just let us know how you came to that calculation
+    After meeting with the strategy team, you've got an idea of where to start, key concerns, and how you can help this real estate company with the market data while keeping the following assumptions in mind:
 
+-   The investor will pay for the property in cash (i.e. no mortgage/interest rate will need to be accounted for).
+-   The time value of money discount rate is 0% (i.e. $1 today is worth the same 100 years from now).
+-   All properties and all square feet within each locale can be assumed to be homogeneous (i.e. a 1000 square foot property in a locale such as Bronx or Manhattan generates twice the revenue and costs twice as much as any other 500 square foot property within that same locale.).
 
-
-## Analysing Short-term Property Renting in NYC
-
-
-
-
-### Introduction   
-
-#####**Problem Statement**
-You are consulting for a real estate company that has a niche in purchasing properties to rent out short-term as part of their business model specifically within New York City.  The real estate company has already concluded that two bedroom properties are the most profitable; however, they do not know which zip codes are the best to invest in.  
-The real estate company has engaged your firm to build out a data product and provide your conclusions to help them understand which zip codes would generate the most profit on short term rentals within New York City.
-You will be looking at publicly available data from Zillow and AirBnB:
-
-* Cost data: Zillow provides us an estimate of value for two-bedroom properties
-* Revenue data: AirBnB is the medium through which the investor plans to lease out their investment property. Fortunately for you, we are able to see how much properties in certain neighborhoods rent out for in New York City
-* You can assume an occupancy rate of 75% or you can come up with your own model to calculate occupancy; just let us know how you came to that calculation      
-After meeting with the strategy team, you've got an idea of where to start, key concerns, and how you can help this real estate company with the market data while keeping the following assumptions in mind:
-
-* The investor will pay for the property in cash (i.e. no mortgage/interest rate will need to be accounted for).
-* The time value of money discount rate is 0% (i.e. $1 today is worth the same 100 years from now).
-* All properties and all square feet within each locale can be assumed to be homogeneous (i.e. a 1000 square foot property in a locale such as Bronx or Manhattan generates twice the revenue and costs twice as much as any other 500 square foot property within that same locale.).
-
-
-
-
-### Packages Required 
+### Packages Required
 
 ##### **Packages**
 
 **R** has been used to perform all data wrangling and analytical tasks. I have also used **Tableau Public** and **R Shiny** to show interactive maps and dashboards.
 
-* `readr`     - To read .csv files
-* `dplyr`     - For efficient data wrangling activities
-* `ggplot2`   - For beautiful visiualizations
-* `DT`        - To display Tables in HTML format
-* `tidyverse` - The mother of all Data wrangling packages.
-* `scales`    - For scaling axis in ggplot2
-* `lubridate` - To manipulate date fields
-* `stringr`   - For string manipulation
-* `shiny`     - To build interactive apps
-* `Tableau`   - For beautiful visiualizations
+-   `readr` - To read .csv files
+-   `dplyr` - For efficient data wrangling activities
+-   `ggplot2` - For beautiful visiualizations
+-   `DT` - To display Tables in HTML format
+-   `tidyverse` - The mother of all Data wrangling packages.
+-   `scales` - For scaling axis in ggplot2
+-   `lubridate` - To manipulate date fields
+-   `stringr` - For string manipulation
+-   `shiny` - To build interactive apps
+-   `Tableau` - For beautiful visiualizations
 
-
-### Data Preperation and Analysis 
-
+### Data Preperation and Analysis
 
 ##### **About the data**
 
-**************************************************************
-The data provided to us are two csv files. **listings.csv** and **Zip_ZHVI_2bedroom.csv**.
-The listings file has details about Airbnb listings in the 5 boroughs of New York.
-The Zillow Home Value Index(ZHVI) file has the property value of 2 bedroom house from the 90s till 2017. We can clearly see from the available data that there are many missing values and many columns  that are redundant. In this analysis only few variables are considered. There are no imputations done for any missing values. A deeper analysis is required to perform all these activities and would also require scraping data from various sources.  
+------------------------------------------------------------------------
 
-+ Important Variables Considered:
-              
-     Variable   | Description
-     -------------  | -------------
-     zipcode        | Zipcode
-     price          | property renatlal price per night 
-     bedrooms       | No. of bedrooms in the property 
-    neighborhood_group_cleansed | 5 Boroughs of NYC
-    1998-06 - 2017-06 | NYC 2 bedroom Property Prices over the years
-    review_location_rating | ratings given for the airbnb rental locations
+The data provided to us are two csv files. **listings.csv** and **Zip\_ZHVI\_2bedroom.csv**. The listings file has details about Airbnb listings in the 5 boroughs of New York. The Zillow Home Value Index(ZHVI) file has the property value of 2 bedroom house from the 90s till 2017. We can clearly see from the available data that there are many missing values and many columns that are redundant. In this analysis only few variables are considered. There are no imputations done for any missing values. A deeper analysis is required to perform all these activities and would also require scraping data from various sources.
 
+-   Important Variables Considered:
 
-```r
+    | Variable                      | Description                                   |
+    |-------------------------------|-----------------------------------------------|
+    | zipcode                       | Zipcode                                       |
+    | price                         | property renatlal price per night             |
+    | bedrooms                      | No. of bedrooms in the property               |
+    | neighborhood\_group\_cleansed | 5 Boroughs of NYC                             |
+    | 1998-06 - 2017-06             | NYC 2 bedroom Property Prices over the years  |
+    | review\_location\_rating      | ratings given for the airbnb rental locations |
+
+``` r
 listings_original <- read_csv("data/listings.csv")
 zillow <- read_csv("data/Zip_Zhvi_2bedroom.csv")
 ```
 
-As you can see the code, few important variables have been considered for this analysis. The most important variables are zipcodes, price, neighborhoods, review_location_rating etc.
-I have removed $ characters from prices and converted them to numbers. Also, rating columns are converted into ordered vectors of range 1 to 10.  Zipcode values which had a range have been assigned the value of the first instance of the range.
+As you can see the code, few important variables have been considered for this analysis. The most important variables are zipcodes, price, neighborhoods, review\_location\_rating etc. I have removed $ characters from prices and converted them to numbers. Also, rating columns are converted into ordered vectors of range 1 to 10. Zipcode values which had a range have been assigned the value of the first instance of the range.
 
-The unwanted columns like variables for State and city were removed as we know that airbnb data contains only data for New York city and hence on merging them together it wi lltake care of the required observations for new york city and so have filtered out variables like City, State etc. Of the two datasets, Zillow was relatively cleaner and did not require much work. 
+The unwanted columns like variables for State and city were removed as we know that airbnb data contains only data for New York city and hence on merging them together it wi lltake care of the required observations for new york city and so have filtered out variables like City, State etc. Of the two datasets, Zillow was relatively cleaner and did not require much work.
 
-
-
-```r
+``` r
 #Selecting only Important variables which we can use for this analysis
 listings_2bed <- filter(listings_original, bedrooms == 2) %>% 
                  select(id, name, listing_url,host_id,host_since, host_is_superhost,
@@ -119,13 +96,11 @@ listings_2bed$review_scores_value       <- ordered(listings_2bed$review_scores_v
                                                levels = 1:10)
 ```
 
-#####**Forecasting Future Property Prices**   
+##### **Forecasting Future Property Prices**
 
-The Zillow table has past prices of the two bed room houses. In this section we have tried to forecast the next 5 years growth in the property prices based on the historic 5 years data.
-This is acheived by calculating the average year on year growth over last 5 years and treating the average constant next 5 years. This will form basis for our analysis on calculating Payback Periods for different rental properties.
+The Zillow table has past prices of the two bed room houses. In this section we have tried to forecast the next 5 years growth in the property prices based on the historic 5 years data. This is acheived by calculating the average year on year growth over last 5 years and treating the average constant next 5 years. This will form basis for our analysis on calculating Payback Periods for different rental properties.
 
-
-```r
+``` r
 zillow_forecast <- select(zillow, City, State, RegionName, names(zillow)[142],
                            names(zillow)[154], names(zillow)[166], names(zillow)[178],
                            names(zillow)[190], names(zillow)[202], names(zillow)[214],
@@ -149,13 +124,15 @@ merged_ijoin <- inner_join(listings_2bed, zillow_forecast, by = c("zipcode" = "R
 merged_sheets <- left_join(listings_2bed, zillow_forecast, by = c("zipcode" = "RegionName"))
 ```
 
-*******************************************************************************************
-#####**Calculating Median Rental Prices**  
-*******************************************************************************************
-We see from the distribution of the price variable that is is skewed. Therefore I have used a median price per zipcode to estimate the price per night per property in that particular zipcode.  
+------------------------------------------------------------------------
 
+##### **Calculating Median Rental Prices**
 
-```r
+------------------------------------------------------------------------
+
+We see from the distribution of the price variable that is is skewed. Therefore I have used a median price per zipcode to estimate the price per night per property in that particular zipcode.
+
+``` r
 listings_2bed  %>% filter(price < 2000) %>%
     ggplot(aes(x = price)) +
     geom_histogram(binwidth = 35,fill = "#ff5a5f") +
@@ -170,9 +147,9 @@ listings_2bed  %>% filter(price < 2000) %>%
           plot.subtitle = element_text(size = 10, color = "darkslategrey", margin = margin(b = 7)))
 ```
 
-![](Capone_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
+![](Capone_files/figure-markdown_github/unnamed-chunk-4-1.png)
 
-```r
+``` r
 merged_ijoin <- merged_ijoin %>% 
   group_by(zipcode) %>%
   mutate(median_rent_zip = median(price)) %>%
@@ -183,26 +160,28 @@ merged_ijoin <- merged_ijoin %>%
                                   "250-400", ">400"))))
 ```
 
-*******************************************************************************************
-#####**Crafting a Visual Data Narrative**   
-******************************************************************************************* 
+------------------------------------------------------------------------
 
-In the below interactive map we can see what areas of the city are being booked most prominently. It is very apparent that Manhattan is the most sorted after areas in the city. Brooklyn also looks crowded  with airbnb rentals. Feel free to explore more by interacting with the tableau public map I have created for this exercise. Please visit the tableau page if the view does not appear proper.
+##### **Crafting a Visual Data Narrative**
 
-https://public.tableau.com/profile/nush#!/vizhome/AirbnbNewYork_15531795122020/Dashboard1
+------------------------------------------------------------------------
 
+In the below interactive map we can see what areas of the city are being booked most prominently. It is very apparent that Manhattan is the most sorted after areas in the city. Brooklyn also looks crowded with airbnb rentals. Feel free to explore more by interacting with the tableau public map I have created for this exercise. Please visit the tableau page if the view does not appear proper.
 
-<iframe src="https://public.tableau.com/views/AirbnbNewYork_15531795122020/Dashboard1?:showVizHome=no&:embed=true"
- width="900" height="650"></iframe>  
- 
-*******************************************************************************************
+<https://public.tableau.com/profile/nush#!/vizhome/AirbnbNewYork_15531795122020/Dashboard1>
 
-#####**What kind of properties being rented**
-*******************************************************************************************
+<iframe src="https://public.tableau.com/views/AirbnbNewYork_15531795122020/Dashboard1?:showVizHome=no&amp;:embed=true" width="900" height="650">
+</iframe>
+
+------------------------------------------------------------------------
+
+##### **What kind of properties being rented**
+
+------------------------------------------------------------------------
 
 From the below chart we can clearly see that Apartments are being rented more. Given the size of the city and the population this is an expected result. We can also see the distribution across the 5 Boroughs of New York.
 
-```r
+``` r
 property_df <- listings_2bed %>%
                  filter(property_type %in% c("Apartment","Condominium", "House",
                                              "Loft")) %>% 
@@ -232,16 +211,17 @@ ggplot(property_df2, aes(x = neighbourhood_group_cleansed, y = ratio,
         plot.subtitle = element_text(size = 10, color = "darkslategrey", margin = margin(b = 7)))
 ```
 
-![](Capone_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
-  
-    
-*******************************************************************************************
-#####**Most Popular Zipcodes Based on Number of Hosts**  
-*******************************************************************************************
- Here we have claculated Popularity of zipcodes based on the number of rentals. Clearly zipcode 11211 is the winner with close to 300 entries.
- 
+![](Capone_files/figure-markdown_github/unnamed-chunk-5-1.png)
 
-```r
+------------------------------------------------------------------------
+
+##### **Most Popular Zipcodes Based on Number of Hosts**
+
+------------------------------------------------------------------------
+
+Here we have claculated Popularity of zipcodes based on the number of rentals. Clearly zipcode 11211 is the winner with close to 300 entries.
+
+``` r
 listings_2bed %>% group_by(zipcode) %>%
                   summarise(num = n()) %>%
                   arrange() %>%
@@ -262,15 +242,17 @@ listings_2bed %>% group_by(zipcode) %>%
                                                margin = margin(b = 7)))
 ```
 
-![](Capone_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
-  
-  
-*****************************************************************************************************************
-#####**Most Popular Properties Based on Location Review**
-********************************************************************************************************  
-Here most popular zipcodes based on location review scores are plotted. We can see that Zipcode 10024 is the most popular of the lot.  
+![](Capone_files/figure-markdown_github/unnamed-chunk-6-1.png)
 
-```r
+------------------------------------------------------------------------
+
+##### **Most Popular Properties Based on Location Review**
+
+------------------------------------------------------------------------
+
+Here most popular zipcodes based on location review scores are plotted. We can see that Zipcode 10024 is the most popular of the lot.
+
+``` r
  merged_sheets %>%
    select(zipcode, review_scores_location) %>%
    group_by(zipcode) %>%
@@ -298,15 +280,17 @@ Here most popular zipcodes based on location review scores are plotted. We can s
          plot.subtitle = element_text(size = 10, color = "darkslategrey", margin = margin(b = 7)))
 ```
 
-![](Capone_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
-    
-******************************************************************************************* 
-#####**Where are the Property Values Growing?**  
-*******************************************************************************************
-Here we have calculated Growth of the property value in 5 years using the forecast value calculated earlier. This is an important factor to be considered for the long run. 
+![](Capone_files/figure-markdown_github/unnamed-chunk-7-1.png)
 
+------------------------------------------------------------------------
 
-```r
+##### **Where are the Property Values Growing?**
+
+------------------------------------------------------------------------
+
+Here we have calculated Growth of the property value in 5 years using the forecast value calculated earlier. This is an important factor to be considered for the long run.
+
+``` r
 merged_ijoin %>%
   group_by(zipcode) %>%
   mutate(growth = year_5_forecast/investment) %>% 
@@ -330,18 +314,19 @@ merged_ijoin %>%
           plot.subtitle = element_text(size = 10, color = "darkslategrey", margin = margin(b = 7)))
 ```
 
-![](Capone_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
+![](Capone_files/figure-markdown_github/unnamed-chunk-8-1.png)
 
+------------------------------------------------------------------------
 
-*******************************************************************************************
-#####**Which zipcode gives quicker ROI?**
-*******************************************************************************************
+##### **Which zipcode gives quicker ROI?**
+
+------------------------------------------------------------------------
 
 Here we are calculating the Payback Period by considering 75% occupancy and Median Rental price per zipcode calculated earlier. Using this we are estimating the years in which the rental properties will be able to payback the initial investment amount.
 
 Please refer to the Shiny app for an interactive visualization of the same.
 
-```r
+``` r
 merged_ijoin <- merged_ijoin %>% group_by(zipcode) %>%
   mutate(annual_payback = 0.75 * 365 * median_rent_zip) %>%
   mutate(payback_period = investment/annual_payback)
@@ -364,19 +349,23 @@ merged_ijoin %>%
           plot.subtitle = element_text(size = 10, color = "darkslategrey", margin = margin(b = 7)))
 ```
 
-![](Capone_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
+![](Capone_files/figure-markdown_github/unnamed-chunk-9-1.png)
 
-*******************************************************************************************
-#####**Summary**
-*******************************************************************************************
-* The top zip codes in terms of quicker ROI are:10305,10312, 10304
-* The most popular zipcodes  11217,11238 and 10002
-* Most important locations in terms of Property Value growth are 11217, 11231, 11215, 11201
-   
+------------------------------------------------------------------------
 
-*******************************************************************************************
-#####**Next Steps**
-*******************************************************************************************
-* Modeling or imputation to predict the prices of the missing zipcodes in zillow dataset
-* Including review data,host verification and other property related information  of host and property for better prediction of which zip codes to invest in
- 
+##### **Summary**
+
+------------------------------------------------------------------------
+
+-   The top zip codes in terms of quicker ROI are:10305,10312, 10304
+-   The most popular zipcodes 11217,11238 and 10002
+-   Most important locations in terms of Property Value growth are 11217, 11231, 11215, 11201
+
+------------------------------------------------------------------------
+
+##### **Next Steps**
+
+------------------------------------------------------------------------
+
+-   Modeling or imputation to predict the prices of the missing zipcodes in zillow dataset
+-   Including review data,host verification and other property related information of host and property for better prediction of which zip codes to invest in
