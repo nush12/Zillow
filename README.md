@@ -1,7 +1,6 @@
 Airbnb Rentals
 ================
 Anusha Chintakunta Manjunatha
-March 22, 2019
 
 Analysing Short-term Property Renting in NYC
 --------------------------------------------
@@ -170,8 +169,7 @@ In the below interactive map we can see what areas of the city are being booked 
 
 <https://public.tableau.com/profile/nush#!/vizhome/AirbnbNewYork_15531795122020/Dashboard1>
 
-<iframe src="https://public.tableau.com/views/AirbnbNewYork_15531795122020/Dashboard1?:showVizHome=no&amp;:embed=true" width="900" height="650">
-</iframe>
+
 
 ------------------------------------------------------------------------
 
