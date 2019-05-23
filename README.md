@@ -147,7 +147,7 @@ listings_2bed  %>% filter(price < 2000) %>%
           plot.subtitle = element_text(size = 10, color = "darkslategrey", margin = margin(b = 7)))
 ```
 
-![](Capone_files/figure-markdown_github/unnamed-chunk-4-1.png)
+![](images/unnamed-chunk-5-1.png)
 
 ``` r
 merged_ijoin <- merged_ijoin %>% 
@@ -211,7 +211,7 @@ ggplot(property_df2, aes(x = neighbourhood_group_cleansed, y = ratio,
         plot.subtitle = element_text(size = 10, color = "darkslategrey", margin = margin(b = 7)))
 ```
 
-![](Capone_files/figure-markdown_github/unnamed-chunk-5-1.png)
+![](images/unnamed-chunk-6-1.png)
 
 ------------------------------------------------------------------------
 
@@ -242,7 +242,7 @@ listings_2bed %>% group_by(zipcode) %>%
                                                margin = margin(b = 7)))
 ```
 
-![](Capone_files/figure-markdown_github/unnamed-chunk-6-1.png)
+![](images/unnamed-chunk-7-1.png)
 
 ------------------------------------------------------------------------
 
@@ -280,7 +280,7 @@ Here most popular zipcodes based on location review scores are plotted. We can s
          plot.subtitle = element_text(size = 10, color = "darkslategrey", margin = margin(b = 7)))
 ```
 
-![](Capone_files/figure-markdown_github/unnamed-chunk-7-1.png)
+![](images/unnamed-chunk-8-1.png)
 
 ------------------------------------------------------------------------
 
@@ -314,7 +314,7 @@ merged_ijoin %>%
           plot.subtitle = element_text(size = 10, color = "darkslategrey", margin = margin(b = 7)))
 ```
 
-![](Capone_files/figure-markdown_github/unnamed-chunk-8-1.png)
+![](images/unnamed-chunk-9-1.png)
 
 ------------------------------------------------------------------------
 
@@ -349,7 +349,7 @@ merged_ijoin %>%
           plot.subtitle = element_text(size = 10, color = "darkslategrey", margin = margin(b = 7)))
 ```
 
-![](Capone_files/figure-markdown_github/unnamed-chunk-9-1.png)
+![](images/unnamed-chunk-10-1.png)
 
 ------------------------------------------------------------------------
 
